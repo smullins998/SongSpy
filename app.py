@@ -8,6 +8,9 @@ from SVMFinal import extract_feature
 import time
 import ssl
 import urllib.request
+import io
+import numpy
+import tempfile
 
 
 app = Flask(__name__)
@@ -20,6 +23,7 @@ ssl_context = ssl.create_default_context()
 ssl_context.check_hostname = False
 ssl_context.verify_mode = ssl.CERT_NONE
 ssl._create_default_https_context = ssl._create_unverified_context
+
 
 
 @app.route('/')
@@ -52,26 +56,28 @@ def upload():
 @app.route('/youtube_upload', methods=['POST'])
 def youtube_upload():   
     if request.method == 'POST':
-        try:
-            youtube_link = request.form.get('youtube-link')  # Access the value of the 'youtube-link' input field
-            if youtube_link:
-                yt = pytube.YouTube(youtube_link)
-                stream = yt.streams.filter(only_audio=True).first()
-                filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
-                output_path = 'youtube_links/' 
-                filey = stream.download(filename=filename)
-                
-                response = extract_feature(filey)
-                
-                os.remove(filename)  
-                
-            else:
-                return render_template('main.html')
+        # try:
+        youtube_link = request.form.get('youtube-link')  # Access the value of the 'youtube-link' input field
+        if youtube_link:
+         
+            yt = pytube.YouTube(youtube_link)
+            stream = yt.streams.filter(only_audio=True).first()
+            filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
+            output_path = 'youtube_links/' 
+            stream.download(filename=filename)
 
-            return render_template('main.html', response=response)
-        except:
-            response = 'There was an error...'   
-            return render_template('main.html', response=response)
+            response = extract_feature(filename)
+            
+            # os.remove(filename)  
+           
+
+        else:
+            return render_template('main.html')
+
+        return render_template('main.html', response=response)
+        # except:
+        #     response = 'There was an error...'   
+        #     return render_template('main.html', response=response)
      
         
     

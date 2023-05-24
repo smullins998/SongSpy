@@ -15,6 +15,7 @@ from Shazam import ShazamSong
 
 
 
+
 openai.api_key = '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'
 
 warnings.filterwarnings('ignore')
@@ -28,7 +29,7 @@ def extract_feature(file_path):
     n_mfcc = 40
 
     try:
-        y, sr = librosa.load(file_path, sr=None, duration=100, offset=30)
+        y, sr = librosa.load(io.Bytes(file_path), sr=None, duration=100, offset=30)
 
         mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
 
@@ -40,7 +41,6 @@ def extract_feature(file_path):
 
     except:
         print( 'Error with {}'.format(file_path))
-
 
     mfcc_df_mean = pd.DataFrame(np.mean(final_json['MFCCs'][0], axis=1)).transpose()
     mfcc_df_var = pd.DataFrame(np.var(final_json['MFCCs'][0], axis=1)).transpose()
@@ -79,9 +79,7 @@ def extract_feature(file_path):
 
     else:
         pass    
-    
-    #Now the shazam block
-    
+   
     Shazam_Artist = ShazamSong(file_path)
     
     if Shazam_Artist is None:
