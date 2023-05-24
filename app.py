@@ -6,12 +6,9 @@ from pytube import YouTube
 from pytube.exceptions import VideoUnavailable
 from SVMFinal import extract_feature
 import time
-from flask_sqlalchemy import SQLAlchemy
 import ssl
 import urllib.request
-import io
-import soundfile as sf
-import tempfile
+
 
 app = Flask(__name__)
 
@@ -24,15 +21,6 @@ ssl_context = ssl.create_default_context()
 ssl_context.check_hostname = False
 ssl_context.verify_mode = ssl.CERT_NONE
 ssl._create_default_https_context = ssl._create_unverified_context
-
-
-# def save_youtube_link(link):
-#     # Determine the folder path where you want to save the YouTube links
-#     folder_path = 'youtube_links'
-
-#     # Save the link to a file in the specified folder
-#     with open(f'{folder_path}/link', 'w') as file:
-#         file.write(link + '\n')
 
 
 @app.route('/')
