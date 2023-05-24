@@ -36,9 +36,10 @@ def extract_feature(file_path):
 
         final_json['MFCCs'].append(mfccs)
         final_json['Spec_Con'].append(sc)
+      
 
     except:
-        print('Error with {}'.format(file_path))
+        print( 'Error with {}'.format(file_path))
 
 
     mfcc_df_mean = pd.DataFrame(np.mean(final_json['MFCCs'][0], axis=1)).transpose()

@@ -16,7 +16,6 @@ app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB
 app.config['ALLOWED_EXTENSIONS'] = {'.wav', '.mp3', '.aif'}
 
 
-# Create a custom SSL context
 ssl_context = ssl.create_default_context()
 ssl_context.check_hostname = False
 ssl_context.verify_mode = ssl.CERT_NONE
@@ -60,13 +59,16 @@ def youtube_upload():
                 stream = yt.streams.filter(only_audio=True).first()
                 filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
                 output_path = 'youtube_links/' 
-                stream.download(filename=filename, output_path=output_path)
-                # response = extract_feature(output_path + filename)
-                # os.remove(output_path + filename)  
+                filey = stream.download(filename=filename)
+                
+                response = extract_feature(filey)
+                
+                os.remove(filename)  
+                
             else:
                 return render_template('main.html')
 
-            return render_template('main.html', response='Hi')
+            return render_template('main.html', response=response)
         except:
             response = 'There was an error...'   
             return render_template('main.html', response=response)
