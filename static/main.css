@@ -1,0 +1,324 @@
+* {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: rgb(179, 179, 179);
+    transition: background 10s;
+    position: relative;
+    background-repeat: repeat;
+    font-weight: bold;
+
+
+  }
+
+.titlebar {
+    position: relative;
+    justify-content: space-evenly;
+    top: 0;
+    width: 100%;
+    height: 75px;
+    border-bottom: #ffffff solid 2px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fade-in 1s ease-in-out forwards;
+} 
+
+
+.social-media {
+  display: flex;
+  position: relative;
+  height: 45px;
+  width: 35%;
+  left: 65%;
+  top: 20%;}
+
+
+.titlebar > p {
+    color: #ffffff;
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    font-size: 40px;
+}
+
+.mainbox { 
+    position: relative;
+    display: flex;
+    top: 25%;
+    left: 10%;
+    width: 80%;
+    height: 70%;
+
+}
+
+
+.file-upload {
+    position: relative;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    width: 190px;
+    height: 225px;
+    background-color: #ffffff;
+    left: 10%;
+  }
+  
+  .file-upload input[type="file"] {
+    display: none;
+  }
+  
+  .file-upload label{
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    color: grey;
+
+  }
+
+
+
+.file-upload p {
+    position: absolute;
+    font-size: 50px;
+    width: 0;
+    height: 0;
+    top: 100px;
+    left: 45%;
+    color: grey;
+
+}
+
+.file-upload h5 {
+  position: relative;
+  font-size: 15px;
+  width: 200px;
+  height: 50px;
+  left: 0%;
+  top: 20%;
+  color: rgb(255, 255, 255);
+}
+
+
+.youtube-upload {
+    position: absolute;
+    border: 2px dashed #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 400px;
+    height: 70px;
+    top: 15%;
+    background-color: #ffffff;
+    left: 55%;
+  }
+
+
+
+  .youtube-button {
+    position: relative;
+    top: 35%;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+  }
+  
+
+  .or-div {
+    position: absolute;
+    text-align: center;
+    top: 15%;
+    left: 40%;
+    width: 100px;
+    height: 100px;
+  }
+
+  .or-div p {
+    font-size: 50px;
+    color: #ffffff;
+  }
+
+
+.arrow-down {
+  position: absolute;
+  display: flex;
+  height: 100px;
+  width: 200px;
+  left: 40%;
+  bottom: 27%;
+}
+
+.about-div {
+  position: relative;
+  left: 5%;
+  top: 2%;
+  width: 90%;
+  height: 0px;
+  justify-content: space-evenly;
+  animation: fade-in 1s ease-in-out forwards;
+
+}
+
+.about-div h3 {
+  color: white;
+  width: 100px;
+  height: 30px;
+  text-decoration: underline;
+  font-style: italic;
+}
+
+.about-div p {
+  position: relative;
+  color: white;
+  left: 0;
+}
+
+.outer-output-div {
+  position: relative;
+  justify-content: center;
+  height: 200px;
+  width: 80%;
+  left: 10%;
+  bottom: 5%;
+  display: flexbox;
+}
+
+
+.outer-output-div > h4 {
+  position: absolute;
+  color: white;
+  left: 43%;
+}
+
+
+.output-div {
+  position: relative;
+  display: inline-block;
+  left: 5%;
+  height: 30%;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  border: 2px #ccc solid;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  top: 15%;
+  padding: 15px;
+  overflow:hidden;
+  width: auto;
+
+}
+
+.output-div p {
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333333;
+  font-weight: bold;
+  overflow: hidden; 
+  border-right: .25em solid orange; 
+  white-space:nowrap;
+  letter-spacing: .01em;
+  animation: 
+    typing 3.0s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+
+.boxContainer{
+  position: absolute;
+  display: flexbox;
+  justify-content: space-between;
+  height: 64px;
+  left: 45%;
+  bottom: 30%;
+  --boxSize: 8px;
+  --gutter: 4px;
+  width: calc((var(--boxSize) + var(--gutter)) * 5);
+}
+
+.box{
+  transform: scaleY(.4);
+  height: 100%;
+  width: var(--boxSize);
+  background: #ffffff;
+  animation-duration: 1.2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  border-radius: 8px;
+}
+
+
+.box1{
+  animation-name: quiet;
+}
+
+.box2{
+  animation-name: normal;
+}
+
+.box3{
+  animation-name: quiet;
+}
+
+.box4{
+  animation-name: loud;
+}
+
+.box5{
+  animation-name: quiet;
+}
+
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 2vw; /* Adjust the value as needed */
+  }
+
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+@keyframes quiet {
+  25%{
+    transform: scaleY(.6);
+  }
+  50%{
+    transform: scaleY(.4);
+  }
+  75%{
+    transform: scaleY(.8);
+  }
+}
+
+@keyframes normal {
+  25%{
+    transform: scaleY(1);
+  }
+  50%{
+    transform: scaleY(.4);
+  }
+  75%{
+    transform: scaleY(.6);
+  }
+}
+@keyframes loud {
+  25%{
+    transform: scaleY(1);
+  }
+  50%{
+    transform: scaleY(.4);
+  }
+  75%{
+    transform: scaleY(1.2);
+  }
+}
