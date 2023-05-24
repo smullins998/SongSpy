@@ -16,7 +16,6 @@ def ShazamSong(file_path):
 
     try:
         result = next(recognize_generator)
-        time.sleep(2)
         artist = result[1]['track']['subtitle']
         return artist
     except (StopIteration, KeyError):

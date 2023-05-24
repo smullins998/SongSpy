@@ -73,8 +73,6 @@ def youtube_upload():
             
             response = extract_feature(output_path)
             
-            time.sleep(1)
-            
             os.remove(output_path)
             
         else:
