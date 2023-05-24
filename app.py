@@ -61,8 +61,8 @@ def youtube_upload():
                 filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
                 output_path = 'youtube_links/' 
                 stream.download(filename=filename, output_path=output_path)
-                response = extract_feature(output_path + filename)
-                os.remove(output_path + filename)  
+                # response = extract_feature(output_path + filename)
+                # os.remove(output_path + filename)  
             else:
                 return render_template('main.html')
 
