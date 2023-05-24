@@ -53,21 +53,24 @@ def upload():
 @app.route('/youtube_upload', methods=['POST'])
 def youtube_upload():   
     if request.method == 'POST':
-        youtube_link = request.form.get('youtube-link')  # Access the value of the 'youtube-link' input field
-        if youtube_link:
-            yt = pytube.YouTube(youtube_link)
-            stream = yt.streams.filter(only_audio=True).first()
-            filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
-            output_path = 'youtube_links/' 
-            stream.download(filename=filename, output_path=output_path)
-            response = extract_feature(output_path + filename)
-            os.remove(output_path + filename)  
-        else:
-            return render_template('main.html')
+        try:
+            youtube_link = request.form.get('youtube-link')  # Access the value of the 'youtube-link' input field
+            if youtube_link:
+                yt = pytube.YouTube(youtube_link)
+                stream = yt.streams.filter(only_audio=True).first()
+                filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
+                output_path = 'youtube_links/' 
+                stream.download(filename=filename, output_path=output_path)
+                response = extract_feature(output_path + filename)
+                os.remove(output_path + filename)  
+            else:
+                return render_template('main.html')
 
-        return render_template('main.html', response=response)
-
-        
+            return render_template('main.html', response='Hi')
+        except:
+            response = 'There was an error...'   
+            return render_template('main.html', response=response)
+     
         
     
 
