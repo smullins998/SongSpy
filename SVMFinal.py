@@ -83,8 +83,13 @@ def extract_feature(file_path):
     
     Shazam_Artist = ShazamSong(file_path)
     
+    if Shazam_Artist is None:
+        Shazam_Artist = 'None'
+    else:
+        pass
     
-    if max_proba >= 50 and (Shazam_Artist is not None and ''.join(keys) in Shazam_Artist):
+    
+    if max_proba >= 50 and (Shazam_Artist != 'None' and ''.join(keys) in Shazam_Artist):
         response = openai.Completion.create(
         engine='text-davinci-003',  # Use the ADA model
         prompt='A user just uploaded an audio file to my web app. Tell them the song is by {} and it is not fake and not artificially generated. Make it casual and brief.'.format(Shazam_Artist, Shazam_Artist),  # Specify your prompt or instructions
@@ -94,7 +99,7 @@ def extract_feature(file_path):
         paragraph = response.choices[0].text.strip()  # Get the generated paragraph
         return paragraph
     
-    if max_proba >= 50 and (''.join(keys) not in Shazam_Artist or Shazam_Artist is None):
+    if max_proba >= 50 and (''.join(keys) not in Shazam_Artist or Shazam_Artist == 'None'):
         response = openai.Completion.create(
             engine='text-davinci-003',  # Use the ADA model
             prompt='A user just uploaded an audio file to my web app. Tell them the song is by {} and that it is fake, and artificially generated. Make it casual and brief.'.format(keys[0], keys[0]),  # Specify your prompt or instructions
@@ -103,7 +108,7 @@ def extract_feature(file_path):
         paragraph = response.choices[0].text.strip()  # Get the generated paragraph
         return paragraph
 
-    if max_proba < 50 and Shazam_Artist is not None:
+    if max_proba < 50 and Shazam_Artist != 'None':
         return "Hmm... It sounds like a {} song, but we're not sure. It's possible it has a featured artist in it...".format(Shazam_Artist)
     else:
         return "Hmm... We're not sure we can identify that song. It's possible it has a featured artist in it..."
