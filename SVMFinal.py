@@ -12,11 +12,12 @@ from sklearn.metrics import accuracy_score
 import pickle 
 import json
 from Shazam import ShazamSong
+from API_Keys import openai_key
 
 
 
 
-openai.api_key = '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'
+openai.api_key = openai_key
 
 warnings.filterwarnings('ignore')
 
@@ -29,7 +30,8 @@ def extract_feature(file_path):
     n_mfcc = 40
 
     try:
-        y, sr = librosa.load(io.Bytes(file_path), sr=None, duration=100, offset=30)
+        
+        y, sr = librosa.load(file_path, sr=None, duration=100, offset=30)
 
         mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
 

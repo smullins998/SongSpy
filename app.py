@@ -8,9 +8,8 @@ from SVMFinal import extract_feature
 import time
 import ssl
 import urllib.request
-import io
-import numpy
-import tempfile
+
+
 
 
 app = Flask(__name__)
@@ -59,17 +58,17 @@ def youtube_upload():
         # try:
         youtube_link = request.form.get('youtube-link')  # Access the value of the 'youtube-link' input field
         if youtube_link:
-         
+        
             yt = pytube.YouTube(youtube_link)
             stream = yt.streams.filter(only_audio=True).first()
             filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
-            output_path = 'youtube_links/' 
+    
             stream.download(filename=filename)
 
             response = extract_feature(filename)
             
-            # os.remove(filename)  
-           
+            os.remove(filename)  
+        
 
         else:
             return render_template('main.html')
