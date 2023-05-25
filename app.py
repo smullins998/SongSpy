@@ -63,11 +63,13 @@ def youtube_upload():
             stream = yt.streams.filter(only_audio=True).first()
             filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
     
-            stream.download(filename=filename)
+            # stream.download(filename=filename)
 
-            response = extract_feature(filename)
+            audio_file = stream.download(filename=filename, output_path=None)
+
+            response = extract_feature(audio_file)
             
-            os.remove(filename)  
+            os.remove(audio_file)  
         
 
         else:
