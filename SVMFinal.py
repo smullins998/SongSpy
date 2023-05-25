@@ -13,7 +13,7 @@ import pickle
 import json
 from Shazam import ShazamSong
 from API_Keys import openai_key
-
+from io import BytesIO
 
 
 
@@ -29,20 +29,16 @@ def extract_feature(file_path):
 
     n_mfcc = 40
 
-    try:
-        
-        y, sr = librosa.load(file_path, sr=None, duration=100, offset=30)
+    
+    y, sr = librosa.load(file_path, sr=None)
 
-        mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
+    mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
 
-        sc = librosa.feature.spectral_contrast(y=y, sr=sr)  
+    sc = librosa.feature.spectral_contrast(y=y, sr=sr)  
 
-        final_json['MFCCs'].append(mfccs)
-        final_json['Spec_Con'].append(sc)
+    final_json['MFCCs'].append(mfccs)
+    final_json['Spec_Con'].append(sc)
       
-
-    except:
-        print( 'Error with {}'.format(file_path))
 
     mfcc_df_mean = pd.DataFrame(np.mean(final_json['MFCCs'][0], axis=1)).transpose()
     mfcc_df_var = pd.DataFrame(np.var(final_json['MFCCs'][0], axis=1)).transpose()

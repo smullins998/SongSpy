@@ -11,6 +11,7 @@ import urllib.request
 import dropbox
 from dropbox.exceptions import AuthError
 import tempfile
+import io
 
 # Specify the access token for your Dropbox account
 
@@ -66,42 +67,40 @@ def youtube_upload():
             stream = yt.streams.filter(only_audio=True).first()
             filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
     
-            # stream.download(filename=filename)
-
-            audio_file = stream.download(filename=filename, output_path=None)
-        
-            access_token = 'sl.BfHiljRELAoeSBDcZs0p6ihhC7g4vrMj_zLKhM6qHecfay3kCmB4jeIRBff9dgjfIo7w3WjZ0q1jpRNWq9qOucLPZrQw_XE5RlKGpJQH4QvAsaO6wnSLMdjB9-aV6c1vlPGq3ck'
-            secret = 'ubao0smd0wg6msn'
-            reg_key = 'w4ex9ok8udpepwh'
-
-            dbx = dropbox.Dropbox(access_token, app_key=reg_key, app_secret=secret)
-
-
-            # Upload the file to Dropbox
-            with open(audio_file, 'rb') as f:
-                response = dbx.files_upload(f.read(), f'/{filename}')
-
-            time.sleep(1)
-
-            metadata, response = dbx.files_download( '/' + filename)
-            data = response.content
-
-            with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
-                temp_file.write(data)
-
-
-            response = extract_feature(temp_file.name)
+           
+            stream.download(filename=filename)
             
-            dbx.files_delete_v2('/' + filename)
+            #  buffer = io.BytesIO()
+
+            # stream.stream_to_buffer(buffer)
+
+            # access_token = 'sl.BfHiljRELAoeSBDcZs0p6ihhC7g4vrMj_zLKhM6qHecfay3kCmB4jeIRBff9dgjfIo7w3WjZ0q1jpRNWq9qOucLPZrQw_XE5RlKGpJQH4QvAsaO6wnSLMdjB9-aV6c1vlPGq3ck'
+            # secret = 'ubao0smd0wg6msn'
+            # reg_key = 'w4ex9ok8udpepwh'
+
+            # dbx = dropbox.Dropbox(access_token, app_key=reg_key, app_secret=secret)
+
+
+            # with open(stream, 'rb') as f:
+            #     response = dbx.files_upload(f.read(), f'/{filename}')
+
+
+            # metadata, response = dbx.files_download( '/' + filename)
+            # data = response.content
+
+            # librosa_buffer = io.BytesIO(data)
+            
+            response = extract_feature(filename)
+            
+            # dbx.files_delete_v2('/' + filename)
+            
+            
             
             try:
-                os.remove(audio_file)  
+                os.remove(filename)  
             except:
                 pass
         
-           
-         
-
 
 
         else:
@@ -116,5 +115,5 @@ def youtube_upload():
     
 
 if __name__ == '__main__':
-    app.run(port=8083, debug=True)
+    app.run(host='0.0.0.0', port=8083, debug=True)
 
