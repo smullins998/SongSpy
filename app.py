@@ -8,8 +8,11 @@ from SVMFinal import extract_feature
 import time
 import ssl
 import urllib.request
+import dropbox
+from dropbox.exceptions import AuthError
+import tempfile
 
-
+# Specify the access token for your Dropbox account
 
 
 app = Flask(__name__)
@@ -66,11 +69,40 @@ def youtube_upload():
             # stream.download(filename=filename)
 
             audio_file = stream.download(filename=filename, output_path=None)
-
-            response = extract_feature(audio_file)
-            
-            os.remove(audio_file)  
         
+            access_token = 'sl.BfHiljRELAoeSBDcZs0p6ihhC7g4vrMj_zLKhM6qHecfay3kCmB4jeIRBff9dgjfIo7w3WjZ0q1jpRNWq9qOucLPZrQw_XE5RlKGpJQH4QvAsaO6wnSLMdjB9-aV6c1vlPGq3ck'
+            secret = 'ubao0smd0wg6msn'
+            reg_key = 'w4ex9ok8udpepwh'
+
+            dbx = dropbox.Dropbox(access_token, app_key=reg_key, app_secret=secret)
+
+
+            # Upload the file to Dropbox
+            with open(audio_file, 'rb') as f:
+                response = dbx.files_upload(f.read(), f'/{filename}')
+
+            time.sleep(1)
+
+            metadata, response = dbx.files_download( '/' + filename)
+            data = response.content
+
+            with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
+                temp_file.write(data)
+
+
+            response = extract_feature(temp_file.name)
+            
+            dbx.files_delete_v2('/' + filename)
+            
+            try:
+                os.remove(audio_file)  
+            except:
+                pass
+        
+           
+         
+
+
 
         else:
             return render_template('main.html')
