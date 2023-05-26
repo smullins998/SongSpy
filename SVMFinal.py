@@ -16,10 +16,9 @@ from API_Keys import openai_key
 from io import BytesIO
 
 
-
 openai.api_key = openai_key
-
 warnings.filterwarnings('ignore')
+
 
 def extract_feature(file_path):
 
@@ -44,13 +43,9 @@ def extract_feature(file_path):
     mfcc_df_var = pd.DataFrame(np.var(final_json['MFCCs'][0], axis=1)).transpose()
 
     sc_df = pd.DataFrame([np.mean(inner_array, axis=1) for inner_array in final_json['Spec_Con']])
-
     mfcc_df = mfcc_df_mean.merge(mfcc_df_var, how='left', left_index=True, right_index=True)
-
     mfcc_df = mfcc_df.merge(sc_df, how='left', left_index=True, right_index=True)
-
     new_column_names = ['Column' + str(i+1) for i in range(len(mfcc_df.columns))]
-
     mfcc_df.columns = new_column_names
 
     
@@ -90,7 +85,6 @@ def extract_feature(file_path):
         response = openai.Completion.create(
         engine='text-davinci-003',  # Use the ADA model
         prompt='A user just uploaded an audio file to my web app. Tell them the song is by {} and it is not fake and not artificially generated. Make it casual and brief.'.format(Shazam_Artist, Shazam_Artist),  # Specify your prompt or instructions
-
         max_tokens=50  # Set the desired length of the generated paragraph
     )
         paragraph = response.choices[0].text.strip()  # Get the generated paragraph
@@ -104,7 +98,7 @@ def extract_feature(file_path):
         )
         paragraph = response.choices[0].text.strip()  # Get the generated paragraph
         return paragraph
-
+ 
     if max_proba < 50 and Shazam_Artist != 'None':
         return "Hmm... It sounds like a {} song, but we're not sure. It's possible it has a featured artist in it...".format(Shazam_Artist)
     else:

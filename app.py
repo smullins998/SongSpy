@@ -13,7 +13,6 @@ from dropbox.exceptions import AuthError
 import tempfile
 import io
 
-# Specify the access token for your Dropbox account
 
 
 app = Flask(__name__)
@@ -66,54 +65,23 @@ def youtube_upload():
             yt = pytube.YouTube(youtube_link)
             stream = yt.streams.filter(only_audio=True).first()
             filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
-    
            
             stream.download(filename=filename)
             
-            #  buffer = io.BytesIO()
-
-            # stream.stream_to_buffer(buffer)
-
-            # access_token = 'sl.BfHiljRELAoeSBDcZs0p6ihhC7g4vrMj_zLKhM6qHecfay3kCmB4jeIRBff9dgjfIo7w3WjZ0q1jpRNWq9qOucLPZrQw_XE5RlKGpJQH4QvAsaO6wnSLMdjB9-aV6c1vlPGq3ck'
-            # secret = 'ubao0smd0wg6msn'
-            # reg_key = 'w4ex9ok8udpepwh'
-
-            # dbx = dropbox.Dropbox(access_token, app_key=reg_key, app_secret=secret)
-
-
-            # with open(stream, 'rb') as f:
-            #     response = dbx.files_upload(f.read(), f'/{filename}')
-
-
-            # metadata, response = dbx.files_download( '/' + filename)
-            # data = response.content
-
-            # librosa_buffer = io.BytesIO(data)
-            
             response = extract_feature(filename)
-            
-            # dbx.files_delete_v2('/' + filename)
-            
             
             
             try:
                 os.remove(filename)  
             except:
                 pass
-        
 
 
         else:
             return render_template('main.html')
 
         return render_template('main.html', response=response)
-        # except:
-        #     response = 'There was an error...'   
-        #     return render_template('main.html', response=response)
-     
-        
-    
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8083, debug=True)
+    app.run(port=8083, debug=True)
 

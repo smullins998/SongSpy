@@ -4,6 +4,7 @@
 }
 
 body {
+    overflow-x: hidden;
     background: rgb(179, 179, 179);
     transition: background 10s;
     position: relative;
@@ -31,7 +32,8 @@ body {
   height: 45px;
   width: 35%;
   left: 65%;
-  top: 20%;}
+  top: 20%;
+}
 
 
 .titlebar > p {
@@ -78,7 +80,6 @@ body {
   }
 
 
-
 .file-upload p {
     position: absolute;
     font-size: 50px;
@@ -106,7 +107,7 @@ body {
     border: 2px dashed #ccc;
     padding: 10px;
     text-align: center;
-    width: 400px;
+    width: 40vw;
     height: 70px;
     top: 15%;
     background-color: #ffffff;
@@ -140,16 +141,6 @@ body {
     color: #ffffff;
   }
 
-
-.arrow-down {
-  position: absolute;
-  display: flex;
-  height: 100px;
-  width: 200px;
-  left: 40%;
-  bottom: 27%;
-}
-
 .about-div {
   position: relative;
   left: 5%;
@@ -180,7 +171,7 @@ body {
   justify-content: center;
   height: 200px;
   width: 80%;
-  left: 10%;
+  left: 5%;
   bottom: 5%;
   display: flexbox;
 }
@@ -270,12 +261,101 @@ body {
 }
 
 
-@media screen and (max-width: 768px) {
+@media  (max-width: 750px) {
   body {
     font-size: 2vw; /* Adjust the value as needed */
   }
+  .titlebar > p {
+    font-size: 5vw;
+    top: 1vh;
+  }
+  .titlebar {
+    height: 7vh;
+  }
+
+  .social-media {
+    height: 4vh;
+  }
+
+  .file-upload {
+    font-size: 1.5vw;
+    width: 22vw;
+    height: 15vh;
+    top: 10%;
+    padding: 10px;
+  }
+  .file-upload p {
+    position: absolute;
+    font-size: 4vw;
+    width: 0;
+    height: 0;
+    top: 40%;
+    left: 45%;
+    color: grey;
+}
+
+.youtube-upload {
+  padding: 1vw;
+  width: 30vw;
+  height: 6vh;
+  top: 15%;
+  border: 1px dashed #ccc;
+  background-color: #ffffff;
+  left: 60%;
+}
+
+.or-div {
+  left: 35%;
+}
+
+.or-div p {
+  font-size: 3vh;
+  color: #ffffff;
+}
+
+.outer-output-div {
+  position: relative;
+  justify-content: center;
+  height: 15vh;
+  width: 80%;
+  left: 10%;
+  bottom: 5%;
+  display: flexbox;
+}
+
+.outer-output-div > h4 {
+font-size: 2vh;
+}
+
+.output-div {
+
+  left: 5%;
+  height: 30%;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  border: 2px #ccc solid;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  top: 30%;
+  padding: 5px;
+}
+
+.output-div p {
+  font-size: 10px;
+
+} 
+
+.about-div h3 {
+  font-size: 4vw;
+}
+
+.box{
+  transform: scaleY(.3);
+  height: 60%;
+  width: 30%;
+}
 
 }
+
 
 @keyframes typing {
   from { width: 0 }
