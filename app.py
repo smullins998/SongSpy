@@ -9,10 +9,8 @@ import time
 import ssl
 import urllib.request
 import dropbox
-from dropbox.exceptions import AuthError
 import tempfile
 import io
-
 
 
 app = Flask(__name__)

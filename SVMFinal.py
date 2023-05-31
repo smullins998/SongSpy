@@ -28,7 +28,6 @@ def extract_feature(file_path):
 
     n_mfcc = 40
 
-    
     y, sr = librosa.load(file_path, sr=None)
 
     mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
