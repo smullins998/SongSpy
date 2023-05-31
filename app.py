@@ -68,12 +68,10 @@ def youtube_upload():
             
             response = extract_feature(filename)
             
-            
             try:
                 os.remove(filename)  
             except:
                 pass
-
 
         else:
             return render_template('main.html')
