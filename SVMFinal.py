@@ -15,9 +15,19 @@ from Shazam import ShazamSong
 from API_Keys import openai_key
 from io import BytesIO
 
-
 openai.api_key = openai_key
 warnings.filterwarnings('ignore')
+
+
+with open('SVM-model', 'rb') as file:
+    model = pickle.load(file)
+        
+with open('SVM-scaler', 'rb') as file:
+    scaler = pickle.load(file)
+    
+with open('SVM-key', 'r') as file:
+    SVM_key = json.load(file)
+    
 
 
 def extract_feature(file_path):
@@ -28,7 +38,7 @@ def extract_feature(file_path):
 
     n_mfcc = 40
 
-    y, sr = librosa.load(file_path, sr=None)
+    y, sr = librosa.load(file_path, sr=None, offset=30, duration=100)
 
     mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
 
@@ -47,12 +57,6 @@ def extract_feature(file_path):
     new_column_names = ['Column' + str(i+1) for i in range(len(mfcc_df.columns))]
     mfcc_df.columns = new_column_names
 
-    
-    with open('SVM-model', 'rb') as file:
-        model = pickle.load(file)
-        
-    with open('SVM-scaler', 'rb') as file:
-        scaler = pickle.load(file)
 
     mfcc_df_scaled = scaler.transform(mfcc_df)
 
@@ -60,9 +64,6 @@ def extract_feature(file_path):
     y_proba = model.predict_proba(mfcc_df_scaled)
     
     max_proba = round(y_proba.max() * 100, 2)
-
-    with open('SVM-key', 'r') as file:
-        SVM_key = json.load(file)
         
     keys = [key for key, value in SVM_key.items() if value == y_pred[0]]
     
