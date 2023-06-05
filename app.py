@@ -8,7 +8,6 @@ from SVMFinal import extract_feature
 import time
 import ssl
 import urllib.request
-import dropbox
 import tempfile
 import io
 
