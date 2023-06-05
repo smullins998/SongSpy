@@ -33,16 +33,6 @@ To run the webapp locally, follow these steps:
 3. Start the web application using the command `python app.py`.
 4. Access the web app through your browser at `http://localhost:5000`.
 
-## Contributing
-
-Contributions to AiArtistClassifier are welcome! If you would like to contribute, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them.
-4. Push your changes to your forked repository.
-5. Submit a pull request describing your changes.
-
 ## License
 
 AiArtistClassifier is released under the [MIT License](LICENSE).
