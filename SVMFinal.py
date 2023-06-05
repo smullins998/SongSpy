@@ -19,18 +19,8 @@ openai.api_key = openai_key
 warnings.filterwarnings('ignore')
 
 
-with open('SVM-model', 'rb') as file:
-    model = pickle.load(file)
-        
-with open('SVM-scaler', 'rb') as file:
-    scaler = pickle.load(file)
-    
-with open('SVM-key', 'r') as file:
-    SVM_key = json.load(file)
-    
 
-
-def extract_feature(file_path):
+def extract_feature(file_path, model, scaler, SVM_key):
 
     final_json = {
                 'MFCCs': [],

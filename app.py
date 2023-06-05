@@ -10,6 +10,17 @@ import ssl
 import urllib.request
 import tempfile
 import io
+import pickle
+import json
+
+with open('SVM-model', 'rb') as file:
+    model = pickle.load(file)
+        
+with open('SVM-scaler', 'rb') as file:
+    scaler = pickle.load(file)
+    
+with open('SVM-key', 'r') as file:
+    SVM_key = json.load(file)
 
 
 app = Flask(__name__)
@@ -36,16 +47,24 @@ def upload():
         file = request.files['music-file']  # This is the file NAME in the HTML
 
         if file:
+                
             filename = secure_filename(file.filename)
+            
+            file.save(filename)
+                
             extension = os.path.splitext(filename)[1].lower()
             if extension not in app.config['ALLOWED_EXTENSIONS']:
                 message = 'Error: This is not an mp3, wav, or aif...'
+                response = ''
             else:
-                response = extract_feature(os.path.join('uploads', filename))
+                response = extract_feature(filename, model=model, scaler=scaler, SVM_key=SVM_key)
 
                 message = ''
+                
+            os.remove(filename)
         else:
             message = 'Error: There was no file submitted...'
+            response = ''
 
         return render_template('main.html', message=message, response=response)
     else:
@@ -65,7 +84,7 @@ def youtube_upload():
            
             stream.download(filename=filename)
             
-            response = extract_feature(filename)
+            response = extract_feature(filename, model=model, scaler=scaler, SVM_key=SVM_key)
             
             try:
                 os.remove(filename)  
