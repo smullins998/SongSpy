@@ -46,7 +46,7 @@
   <div class="file-upload">
     <form method="POST" action="/upload" enctype="multipart/form-data" id="upload-form">
       <label for="file-input">Drag and drop files here or click to browse</label>
-      <input type="file" id="file-input" name="music-file" onchange="submitForm()" />
+      <input type="file" id="file-input" name="music-file" onchange="submitForm()" onclick="showContainer()" />
       <h5>{{ message }}</h5>
       <p>+</p>
     </form>
