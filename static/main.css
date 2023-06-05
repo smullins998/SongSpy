@@ -29,11 +29,13 @@ body {
 .social-media {
   display: flex;
   position: relative;
+  justify-content: center;
   height: 45px;
   width: 35%;
   left: 65%;
   top: 20%;
 }
+
 
 
 .titlebar > p {
