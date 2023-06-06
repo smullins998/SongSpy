@@ -6,7 +6,7 @@ SongSpy is a web application that utilizes advanced audio extraction techniques 
 
 ## **[SongSpy](https://smullins.pythonanywhere.com/)**
 
-![Alt Text](https://github.com/smullins998/ArtistClassifier4/blob/main/static/Screenshot%202023-06-05%20at%202.06.16%20PM.png?raw=true)
+![Alt Text](https://github.com/smullins998/SongSpy/blob/main/static/Screenshot%202023-06-06%20at%203.37.50%20PM.png?raw=true)
 
 ## Artists
 
