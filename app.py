@@ -13,7 +13,7 @@ import io
 import pickle
 import json
 
-with open('SVM-model', 'rb') as file:
+with open('mlp_model.pkl', 'rb') as file:
     model = pickle.load(file)
         
 with open('SVM-scaler', 'rb') as file:

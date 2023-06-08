@@ -21,7 +21,9 @@ warnings.filterwarnings('ignore')
 
 
 def extract_feature(file_path, model, scaler, SVM_key):
-
+    
+    Shazam_Artist = ShazamSong(file_path)
+    
     final_json = {
                 'MFCCs': [],
                 'Spec_Con': [] }
@@ -63,7 +65,7 @@ def extract_feature(file_path, model, scaler, SVM_key):
     else:
         pass    
    
-    Shazam_Artist = ShazamSong(file_path)
+    
     
     if Shazam_Artist is None:
         Shazam_Artist = 'None'
