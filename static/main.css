@@ -1,6 +1,7 @@
 * {
     height: 100%;
     width: 100%;
+
 }
 
 body {
@@ -150,9 +151,8 @@ body {
   width: 90%;
   height: 0px;
   justify-content: space-evenly;
-  animation: fade-in 1s ease-in-out forwards;
-
 }
+
 
 .about-div h3 {
   color: white;
@@ -166,6 +166,7 @@ body {
   position: relative;
   color: white;
   left: 0;
+  font-weight: 25;
 }
 
 .outer-output-div {
@@ -403,4 +404,9 @@ font-size: 2vh;
   75%{
     transform: scaleY(1.2);
   }
+}
+
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts/occupied-font/Occupied-R826.otf') format('truetype');
 }
