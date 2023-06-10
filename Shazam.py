@@ -19,4 +19,3 @@ def ShazamSong(file_path):
         return artist
     except (StopIteration, KeyError):
         return None
-    

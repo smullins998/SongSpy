@@ -95,4 +95,4 @@ def extract_feature(file_path, model, scaler, SVM_key):
         return "Hmm... It sounds like a {} song, but we're not sure. It's possible it has a featured artist in it...".format(Shazam_Artist)
     else:
         return "Hmm... We're not sure we can identify that song. It's possible it has a featured artist in it..."
-
+    
