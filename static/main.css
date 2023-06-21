@@ -1,6 +1,7 @@
 * {
     height: 100%;
     width: 100%;
+    font-family: 'CustomFont';
 
 }
 
@@ -408,5 +409,5 @@ font-size: 2vh;
 
 @font-face {
   font-family: 'CustomFont';
-  src: url('/fonts/occupied-font/Occupied-R826.otf') format('truetype');
+  src: url('/fonts/fonts/CircularSpotifyText-Book.otf') format('truetype');
 }
