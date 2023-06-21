@@ -1,7 +1,7 @@
 * {
     height: 100%;
     width: 100%;
-    font-family: 'CustomFont';
+    font-family: 'Circular Std', sans-serif;
 
 }
 
@@ -407,7 +407,3 @@ font-size: 2vh;
   }
 }
 
-@font-face {
-  font-family: 'CustomFont';
-  src: url('/fonts/fonts/CircularSpotifyText-Book.otf') format('truetype');
-}
