@@ -11,7 +11,6 @@ import io
 import pickle
 import json
 
-
 with open('mlp_model.pkl', 'rb') as file:
     model = pickle.load(file)
         
