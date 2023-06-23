@@ -27,7 +27,7 @@ with open('SVM-scaler', 'rb') as file:
 with open('SVM-key', 'r') as file:
     SVM_key = json.load(file)
 
-def extract_feature(file_path, model, scaler, SVM_key):
+def extract_feature(file_path):
     
     Shazam_Artist = ShazamSong(file_path)
     

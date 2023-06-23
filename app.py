@@ -46,7 +46,7 @@ def upload():
                 message = 'Error: This is not an mp3, wav, or aif...'
                 response = ''
             else:
-                response = extract_feature(filename, model=model, scaler=scaler, SVM_key=SVM_key)
+                response = extract_feature(filename)
 
                 message = ''
                 
@@ -84,7 +84,7 @@ def youtube_upload():
                 
                                         
                                         
-            response = extract_feature(filename, model=model, scaler=scaler, SVM_key=SVM_key)
+            response = extract_feature(filename)
             
             try:
                 os.remove(filename)  
