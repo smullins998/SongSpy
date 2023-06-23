@@ -76,13 +76,6 @@ def youtube_upload():
         # try:
         youtube_link = request.form.get('youtube-link')  # Access the value of the 'youtube-link' input field
         if youtube_link:
-        
-            # yt = pytube.YouTube(youtube_link)
-            # stream = yt.streams.filter(only_audio=True).first()
-            # filename = secure_filename(''.join(list(stream.default_filename)[0:-4]) + '.wav')
-           
-            # stream.download(filename=filename)
-            
 
 
             ydl_opts = {
