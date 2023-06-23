@@ -11,15 +11,6 @@ import io
 import pickle
 import json
 
-with open('mlp_model.pkl', 'rb') as file:
-    model = pickle.load(file)
-        
-with open('SVM-scaler', 'rb') as file:
-    scaler = pickle.load(file)
-    
-with open('SVM-key', 'r') as file:
-    SVM_key = json.load(file)
-
 
 app = Flask(__name__)
 
