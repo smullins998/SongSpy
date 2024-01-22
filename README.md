@@ -1,4 +1,4 @@
-# SongSpy
+# SongSpy: Identifying Artificial Music
 
 ## Description
 
